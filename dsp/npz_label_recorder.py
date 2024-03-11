@@ -7,7 +7,8 @@ import numpy as np
 
 class DataRecorder:
     def __init__(self):
-        self.fieldnames = ['millis', 'hall', 'ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'event']
+        # self.fieldnames = ['millis', 'hall', 'ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'event']
+        self.fieldnames = ['millis', 'hall', 'ch0', 'ch2', 'ch3', 'ch4', 'event']
         self.event_label = None
         self.event_labels = ["rest", "thumb-to-index", "thumb-to-pinky", "clench"]
         self.root = tk.Tk()
@@ -115,18 +116,21 @@ if __name__ == "__main__":
     while serialPort:
         x = serialPort.readline()
         try:
-            millis, hall, ch0, ch1, ch2, ch3, ch4 = x.decode("utf-8").split()[1:]
+            # millis, hall, ch0, ch1, ch2, ch3, ch4 = x.decode("utf-8").split()[1:]
+            millis, hall, ch0, ch2, ch3, ch4 = x.decode("utf-8").split()[1:]
         except:
             continue
         millis = int(millis)
         ch0 = int(ch0)
-        ch1 = int(ch1)
+        # ch1 = int(ch1)
         ch2 = int(ch2)
         ch3 = int(ch3)
         ch4 = int(ch4)
         hall = int(hall)
-        row = [millis, hall, ch0, ch1, ch2, ch3, ch4, data_recorder.event_label]
-        print(millis, hall, ch0, ch1, ch2, ch3, ch4, data_recorder.event_label)
+        # row = [millis, hall, ch0, ch1, ch2, ch3, ch4, data_recorder.event_label]
+        row = [millis, hall, ch0, ch2, ch3, ch4, data_recorder.event_label]
+        # print(millis, hall, ch0, ch1, ch2, ch3, ch4, data_recorder.event_label)
+        print(millis, hall, ch0, ch2, ch3, ch4, data_recorder.event_label)
         data_recorder.current_window.append(row[:-1])
 
         if data_recorder.data_ready:
